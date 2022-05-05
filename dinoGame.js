@@ -65,6 +65,7 @@ var jumpstart = dinoJumpHeight.length;
 var score = 0;
 
 function initializeCanvas() {
+    document.getElementById("rr").style.visibility = "hidden";
     console.clear();
     gcanvas = document.getElementById("gameCanvas");
     gctx= gcanvas.getContext("2d");
@@ -116,7 +117,11 @@ function draw() {
         gctx.fillText("Try Again", gameWidth/2, gameHeight/2+100);
         clearInterval(gameLoop);
         gameLoop = setInterval(empty, 60);
-        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank").focus();
+        gcanvas.style.visibility = "hidden";
+        document.getElementById("rr").style.visibility = "visible";
+        document.getElementById("rr").style.position = "fixed";
+        document.getElementById("rr").style.left = "0px";
+        //window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank").focus();
         return;
     }
 
@@ -235,3 +240,4 @@ function collisionCheck() {
 function empty() {
 
 }
+
