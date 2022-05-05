@@ -134,7 +134,7 @@ function draw() {
 
     if(timeSinceLastObstacle >= timeTillNextObstacle) {
         timeSinceLastObstacle = 0;
-        timeTillNextObstacle = 1000 * (Math.random()/2+0.5)
+        timeTillNextObstacle = 1000 * (Math.random()/2+0.65)
         for(var i = 0; i<obstacles.length; i++) {
             if(obstacles[i].used == false) {
                 var obstacleType = null;
