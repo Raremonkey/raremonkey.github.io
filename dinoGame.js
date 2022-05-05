@@ -67,7 +67,6 @@ var jumpstart = dinoJumpHeight.length;
 var score = 0;
 
 function initializeCanvas() {
-    document.getElementById("rr").style.visibility = "hidden";
     console.clear();
     gcanvas = document.getElementById("gameCanvas");
     gctx= gcanvas.getContext("2d");
@@ -243,6 +242,10 @@ function collisionCheck() {
         ) return true;
     }
     return false;
+}
+
+function hideRR() {
+    document.getElementById("rr").style.visibility = "hidden";
 }
 
 function empty() {
