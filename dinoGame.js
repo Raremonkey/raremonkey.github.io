@@ -116,7 +116,7 @@ function draw() {
         gctx.fillText("Try Again", gameWidth/2, gameHeight/2+100);
         clearInterval(gameLoop);
         gameLoop = setInterval(empty, 60);
-        window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank").focus();
         return;
     }
 
