@@ -112,7 +112,7 @@ function draw() {
         gctx.textAlign = "center";
         gctx.clearRect(0, 0, gameWidth, gameHeight);
         gctx.font = "200px ＭＳ Ｐゴシック";      
-        gctx.fillText("1 2 3 4 5 6", gameWidth/2, gameHeight/2+100);
+        gctx.fillText("1 8 7 4 2 0", gameWidth/2, gameHeight/2+100);
         clearInterval(gameLoop);
         gameLoop = setInterval(empty, 60);
         return;
