@@ -15,20 +15,22 @@ var timeSinceLastObstacle;
 var timeTillNextObstacle;
 
 var obstacles = [
-    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0},
-    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0},
-    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0},
-    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0},
-    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0}
+    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0, imgSlot:0},
+    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0, imgSlot:0},
+    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0, imgSlot:0},
+    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0, imgSlot:0},
+    {posX: gameWidth, used: false, width: 0, height: 0, dtf:0, imgSlot:0}
 ];
 
 const obstacleTypes = [
-    {width:40, height:100, dtf:0, bias: 0.3},  //Kaktus
-    {width:80, height:100, dtf:0, bias: 0.6},  //Kaktus*2
-    {width:60, height:40, dtf:0, bias: 0.7}, //Vogel N
-    {width:60, height:40, dtf:80, bias: 0.9},  //Vogel H
-    {width:120, height:100, dtf:0, bias: 1}  //Kaktus*3   
+    {width:40, height:100, dtf:0, bias: 0.3, imgSlot:0},  //Kaktus
+    {width:80, height:100, dtf:0, bias: 0.6, imgSlot:1},  //Kaktus*2
+    {width:60, height:40, dtf:0, bias: 0.7, imgSlot:2}, //Vogel N
+    {width:60, height:40, dtf:80, bias: 0.9, imgSlot:3},  //Vogel H
+    {width:120, height:100, dtf:0, bias: 1, imgSlot:4}  //Kaktus*3   
 ];
+
+var obstacleImgs = [null,null,null,null,null];
 
 const dinoProperties = {width: 60, height: 60, position: {x:150, y:395}};
 
@@ -41,15 +43,15 @@ const dinoAnim = [
 
 const speedAmps = [
     {amp: 1,   score:0},
-    {amp: 1.1, score:100},
-    {amp: 1.2, score:200},
-    {amp: 1.3, score:300},
-    {amp: 1.5, score:400},
-    {amp: 1.7, score:500},
-    {amp: 1.9, score:600},
-    {amp: 2.2, score:700},
-    {amp: 2.5, score:800},
-    {amp: 3,   score:900}
+    {amp: 1.05, score:100},
+    {amp: 1.1, score:200},
+    {amp: 1.15, score:300},
+    {amp: 1.3, score:400},
+    {amp: 1.45, score:500},
+    {amp: 1.6, score:600},
+    {amp: 1.9, score:700},
+    {amp: 2.1, score:800},
+    {amp: 2.4,   score:900}
 ];
 
 var currSpeedAmp = 1;
@@ -79,7 +81,15 @@ function beginPlay() {
     currSpeedAmp = 1;
     dinoJumpHeight=dinoJumpHeight0;
     score = 0;
+
     bg = document.getElementById("bg");
+    obstacleImgs[0] = document.getElementById("cactus");
+    obstacleImgs[1] = document.getElementById("cactus2");
+    obstacleImgs[2] = document.getElementById("bird");
+    obstacleImgs[3] = document.getElementById("bird2");
+    obstacleImgs[4] = document.getElementById("cactus3");
+
+
     gctx.drawImage(bg, 0, 400, gameWidth, 100);
     for(var i = 0; i<obstacles.length; i++) {
         obstacles[i].posX = 1000;
@@ -98,7 +108,7 @@ function draw() {
         if(currSpeedAmp==2.2) dinoJumpHeight=dinoJumpHeight700;
     }
 
-    if(score >= 1500) {
+    if(score >= 1000) {
         playstate = 2;
         gctx.textAlign = "center";
         gctx.clearRect(0, 0, gameWidth, gameHeight);
@@ -121,7 +131,6 @@ function draw() {
         document.getElementById("rr").style.visibility = "visible";
         document.getElementById("rr").style.position = "fixed";
         document.getElementById("rr").style.left = "0px";
-        //window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank").focus();
         return;
     }
 
@@ -147,6 +156,7 @@ function draw() {
                 obstacles[i].height = obstacleType.height;
                 obstacles[i].width = obstacleType.width;
                 obstacles[i].dtf = obstacleType.dtf;
+                obstacles[i].imgSlot = obstacleType.imgSlot;
                 console.log("Spawned Obstacle");
                 break;
             }
@@ -178,9 +188,7 @@ function draw() {
                 obstacles[i].used = false;
                 obstacles[i].posX = gameWidth;
             } else {
-                gctx.beginPath();
-                gctx.rect(obstacles[i].posX, 360 - obstacles[i].dtf, obstacles[i].width, obstacles[i].height);
-                gctx.stroke();
+                gctx.drawImage(obstacleImgs[obstacles[i].imgSlot], obstacles[i].posX, 360-obstacles[i].dtf, obstacles[i].width, obstacles[i].height);
             }   
         }   
     }
