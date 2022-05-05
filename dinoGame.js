@@ -126,10 +126,6 @@ function draw() {
         gctx.fillText("Try Again", gameWidth/2, gameHeight/2+100);
         clearInterval(gameLoop);
         gameLoop = setInterval(empty, 60);
-        gcanvas.style.visibility = "hidden";
-        document.getElementById("rr").style.visibility = "visible";
-        document.getElementById("rr").style.position = "fixed";
-        document.getElementById("rr").style.left = "0px";
         return;
     }
 
@@ -242,10 +238,6 @@ function collisionCheck() {
         ) return true;
     }
     return false;
-}
-
-function hideRR() {
-    document.getElementById("rr").style.visibility = "hidden";
 }
 
 function empty() {
