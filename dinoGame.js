@@ -107,7 +107,7 @@ function draw() {
         if(currSpeedAmp==2.2) dinoJumpHeight=dinoJumpHeight700;
     }
 
-    if(score >= 1000) {
+    if(score >= 1250) {
         playstate = 2;
         gctx.textAlign = "center";
         gctx.clearRect(0, 0, gameWidth, gameHeight);
